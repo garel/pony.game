@@ -3,6 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import { uglify } from 'rollup-plugin-uglify';
 import typescript from 'rollup-plugin-typescript2';
+import copy from "rollup-plugin-copy";
 
 export default {
 
@@ -33,6 +34,13 @@ export default {
             'typeof PLUGIN_CAMERA3D': JSON.stringify(false),
             'typeof PLUGIN_FBINSTANT': JSON.stringify(false),
             'typeof FEATURE_SOUND': JSON.stringify(true)
+        }),
+
+        copy({
+            targets: [
+                { src: 'template/index.html', dest: 'dist' },
+                { src: 'assets/*', dest: 'dist/assets' }
+            ]
         }),
 
         //  Parse our .ts source files
